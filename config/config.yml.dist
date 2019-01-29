@@ -27,7 +27,7 @@ container:
 # e.g. styles/my_custom_theme.css. This can be a relative or absolute URL.
 #
 # To stop Cookie Consent from loading CSS at all, specify false.
-theme: light-floating
+theme: block
 
 # The path for the consent cookie that Cookie Consent uses, to remember that
 # users have consented to cookies. Use to limit consent to a specific path
@@ -44,3 +44,10 @@ domain:
 # The number of days Cookie Consent should store the user’s consent information
 # for.
 expiryDays: 365
+
+## The Position of the Cookie Consent
+positon: bottom
+
+palette-popup-background: '#237afc'
+
+palette-button-background: '#f1d600'

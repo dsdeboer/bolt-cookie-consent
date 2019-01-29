@@ -7,6 +7,7 @@
         "bolt/bolt": "^3.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "phpunit/phpunit": "^4.7"
     },
     "license": "MIT",
@@ -14,6 +15,11 @@
         {
             "name": "Nicolas Béhier-Dévigne",
             "homepage": "http://www.leskis.net",
+            "role": "Developer"
+        },
+        {
+            "name": "Dustin Utecht",
+            "homepage": "https://www.codm.de",
             "role": "Developer"
         }
     ],
