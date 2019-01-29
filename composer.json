@@ -11,7 +11,6 @@
         "phpunit/phpunit": "^4.7"
     },
     "license": "MIT",
-    "version": "2.1.1",
     "authors": [
         {
             "name": "Nicolas Béhier-Dévigne",
