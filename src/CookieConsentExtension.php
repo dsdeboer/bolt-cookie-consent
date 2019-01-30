@@ -21,7 +21,7 @@ class CookieConsentExtension extends SimpleExtension
             'message'    => 'This website uses cookies to ensure you get the best experience on our website',
             'dismiss'    => 'Got it!',
             'learnMore'  => 'More info',
-            'link'       => '',
+            'href'       => '',
             'container'  => '',
             'theme'      => 'block',
             'position'   => 'bottom',
@@ -29,7 +29,15 @@ class CookieConsentExtension extends SimpleExtension
             'palette-button-background' => '#f1d600',
             'path'       => '/',
             'domain'     => '',
-            'expiryDays' => 365
+            'expiryDays' => 365,
+            'custom-html-header' => '<span class="cc-header">{{header}}</span>&nbsp;',
+            'custom-html-message' => '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
+            'custom-html-messageLink' => '<span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a></span>',
+            'custom-html-dismiss' => '<a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>',
+            'custom-html-allow' => '<a aria-label="allow cookies" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>',
+            'custom-html-deny' => '<a aria-label="deny cookies" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>',
+            'custom-html-link' => '<a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>',
+            'custom-html-close' => '<span aria-label="dismiss cookie message" tabindex="0" class="cc-close">{{close}}</span>',
         ];
     }
 
@@ -50,14 +58,14 @@ class CookieConsentExtension extends SimpleExtension
 <script>
 window.addEventListener("load", function(){
     window.cookieconsent.initialise({
-        "showLink": '%learnMore%',
         "position": '%position%',
         "container": %container%,
         "theme": '%theme%',
         "content": {
+            "link": '%learnMore%',
             "message": '%message%',
             "dismiss": '%dismiss%',
-            "link": %link%
+            "href": %href%
         },
         "cookie": {
             "path": '%path%',
@@ -71,6 +79,16 @@ window.addEventListener("load", function(){
             "button": {
                 "background": "%palette_button_background%"
             }
+        },
+        "elements": {
+            "header": '%custom-html-header%',
+            "message": '%custom-html-message%',
+            "messagelink": '%custom-html-messageLink%',
+            "dismiss": '%custom-html-dismiss%',
+            "allow": '%custom-html-allow%',
+            "deny": '%custom-html-deny%',
+            "link": '%custom-html-link%',
+            "close": '%custom-html-close%',
         }
     })
 });
@@ -82,7 +100,15 @@ EOM;
             '%learnMore%',
             '%position%',
             '%palette_popup_background%',
-            '%palette_button_background%'
+            '%palette_button_background%',
+            '%custom-html-header%',
+            '%custom-html-message%',
+            '%custom-html-messageLink%',
+            '%custom-html-dismiss%',
+            '%custom-html-allow%',
+            '%custom-html-deny%',
+            '%custom-html-link%',
+            '%custom-html-close%'
         ];
 
         $replaceArray = [
@@ -92,13 +118,21 @@ EOM;
             htmlspecialchars($config['position'], ENT_QUOTES),
             htmlspecialchars($config['palette-popup-background'], ENT_QUOTES),
             htmlspecialchars($config['palette-button-background'], ENT_QUOTES),
+            $config['custom-html-header'],
+            $config['custom-html-message'],
+            $config['custom-html-messageLink'],
+            $config['custom-html-dismiss'],
+            $config['custom-html-allow'],
+            $config['custom-html-deny'],
+            $config['custom-html-link'],
+            $config['custom-html-close'],
         ];
 
-        if ($config['link'] !== '') {
-            $searchArray[] = '%link%';
-            $replaceArray[] = "'" . htmlspecialchars($config['link'], ENT_QUOTES) . "'";
+        if ($config['href'] !== '') {
+            $searchArray[] = '%href%';
+            $replaceArray[] = "'" . htmlspecialchars($config['href'], ENT_QUOTES) . "'";
         } else {
-            $searchArray[] = '%link%';
+            $searchArray[] = '%href%';
             $replaceArray[] = 'null';
         }
 
