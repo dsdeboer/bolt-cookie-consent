@@ -21,7 +21,7 @@ For more information, see this page in [Silktide documentation](https://silktide
 
 ### Configuration
 1. Go to "Configure Extensions" (Hover over "Extras" menu item)
-2. Click on "cookie-consent.leskis.yml"
+2. Click on "cookie-consent.charpand.yml"
 3. Fill in your messages. (important: whitespace between colon and value)
 
 ---

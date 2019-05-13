@@ -61,3 +61,6 @@ custom-html-allow: <a aria-label="allow cookies" tabindex="0" class="cc-btn cc-a
 custom-html-deny: <a aria-label="deny cookies" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>
 custom-html-link: <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>
 custom-html-close: <span aria-label="dismiss cookie message" tabindex="0" class="cc-close">{{close}}</span>
+
+## Use with caution
+#ignore-styling: false

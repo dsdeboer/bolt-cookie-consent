@@ -1,13 +1,19 @@
 {
-    "name": "codm/cookie-consent",
+    "name": "charpand/cookie-consent",
     "description": "Easily add Cookie Consent script from Silktide. A free solution to the EU Cookie Law.",
     "type": "bolt-extension",
-    "keywords": ["cookie","Silktide","EU Cookie Law"],
+    "keywords": [
+        "cookie",
+        "Silktide",
+        "EU Cookie Law"
+    ],
     "require": {
+        "php": "^7.0",
         "bolt/bolt": "^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.7"
+        "phpunit/phpunit": "^4.7",
+        "ext-json": "*"
     },
     "license": "MIT",
     "authors": [
@@ -20,24 +26,28 @@
             "name": "Dustin Utecht",
             "homepage": "https://www.codm.de",
             "role": "Developer"
+        },
+        {
+            "name": "Duncan de Boer",
+            "role": "Developer"
         }
     ],
-    "minimum-stability" : "dev",
-    "prefer-stable" : true,
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Bolt\\Extension\\Leskis\\CookieConsent\\": "src"
+            "Bolt\\Extension\\Charpand\\CookieConsent\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bolt\\Extension\\Leskis\\CookieConsent\\Tests\\": "tests",
+            "Bolt\\Extension\\Charpand\\CookieConsent\\Tests\\": "tests",
             "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
         "bolt-assets": "web",
-        "bolt-class": "Bolt\\Extension\\Leskis\\CookieConsent\\CookieConsentExtension",
+        "bolt-class": "Bolt\\Extension\\Charpand\\CookieConsent\\CookieConsentExtension",
         "bolt-icon": "web/bolt-icon.png"
     }
 }

@@ -1,60 +1,26 @@
 <?php
 
-namespace Bolt\Extension\Leskis\CookieConsent;
+namespace Bolt\Extension\Charpand\CookieConsent;
 
+use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\File\Stylesheet;
 use Bolt\Asset\Snippet\Snippet;
-use Bolt\Asset\File\JavaScript;
-use Bolt\Controller\Zone;
 use Bolt\Asset\Target;
+use Bolt\Controller\Zone;
 use Bolt\Extension\SimpleExtension;
+use Bolt\Translation\Translator as Trans;
+use Twig_Markup;
 
 /**
  * CookieConsent extension class.
  */
 class CookieConsentExtension extends SimpleExtension
 {
-
-    protected function getDefaultConfig()
-    {
-        return [
-            'message'    => 'This website uses cookies to ensure you get the best experience on our website',
-            'dismiss'    => 'Got it!',
-            'learnMore'  => 'More info',
-            'href'       => '',
-            'container'  => '',
-            'theme'      => 'block',
-            'position'   => 'bottom',
-            'palette-popup-background' => '#383b75',
-            'palette-button-background' => '#f1d600',
-            'path'       => '/',
-            'domain'     => '',
-            'expiryDays' => 365,
-            'custom-html-header' => '<span class="cc-header">{{header}}</span>&nbsp;',
-            'custom-html-message' => '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
-            'custom-html-messageLink' => '<span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a></span>',
-            'custom-html-dismiss' => '<a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>',
-            'custom-html-allow' => '<a aria-label="allow cookies" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>',
-            'custom-html-deny' => '<a aria-label="deny cookies" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>',
-            'custom-html-link' => '<a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>',
-            'custom-html-close' => '<span aria-label="dismiss cookie message" tabindex="0" class="cc-close">{{close}}</span>',
-        ];
-    }
-
-    protected function registerAssets()
-    {
-        return [
-            (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
-            (new Stylesheet('cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
-            (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
-        ];
-    }
-
-    public function cookieConsentSnippet()
+    public function cookieConsentSnippet(): Twig_Markup
     {
         $config = $this->getConfig();
 
-        $html = <<< EOM
+        $html        = <<< EOM
 <script>
 window.addEventListener("load", function(){
     window.cookieconsent.initialise({
@@ -112,9 +78,9 @@ EOM;
         ];
 
         $replaceArray = [
-            htmlspecialchars($config['message'], ENT_QUOTES),
-            htmlspecialchars($config['dismiss'], ENT_QUOTES),
-            htmlspecialchars($config['learnMore'], ENT_QUOTES),
+            htmlspecialchars(Trans::__($config['message']), ENT_QUOTES),
+            htmlspecialchars(Trans::__($config['dismiss']), ENT_QUOTES),
+            htmlspecialchars(Trans::__($config['learnMore']), ENT_QUOTES),
             htmlspecialchars($config['position'], ENT_QUOTES),
             htmlspecialchars($config['palette-popup-background'], ENT_QUOTES),
             htmlspecialchars($config['palette-button-background'], ENT_QUOTES),
@@ -129,18 +95,18 @@ EOM;
         ];
 
         if ($config['href'] !== '') {
-            $searchArray[] = '%href%';
+            $searchArray[]  = '%href%';
             $replaceArray[] = "'" . htmlspecialchars($config['href'], ENT_QUOTES) . "'";
         } else {
-            $searchArray[] = '%href%';
+            $searchArray[]  = '%href%';
             $replaceArray[] = 'null';
         }
 
         if ($config['container'] !== '') {
-            $searchArray[] = '%container%';
+            $searchArray[]  = '%container%';
             $replaceArray[] = "'" . htmlspecialchars($config['container'], ENT_QUOTES) . "'";
         } else {
-            $searchArray[] = '%container%';
+            $searchArray[]  = '%container%';
             $replaceArray[] = 'null';
         }
 
@@ -159,6 +125,49 @@ EOM;
         ]);
 
         $html = str_replace($searchArray, $replaceArray, $html);
-        return new \Twig_Markup($html, 'UTF-8');
+        return new Twig_Markup($html, 'UTF-8');
+    }
+
+    protected function getDefaultConfig(): array
+    {
+        return [
+            'message'                   => 'This website uses cookies to ensure you get the best experience on our website',
+            'dismiss'                   => 'Got it!',
+            'ignore-styling'            => false,
+            'learnMore'                 => 'More info',
+            'href'                      => '',
+            'container'                 => '',
+            'theme'                     => 'block',
+            'position'                  => 'bottom',
+            'palette-popup-background'  => '#383b75',
+            'palette-button-background' => '#f1d600',
+            'path'                      => '/',
+            'domain'                    => '',
+            'expiryDays'                => 365,
+            'custom-html-header'        => '<span class="cc-header">{{header}}</span>&nbsp;',
+            'custom-html-message'       => '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
+            'custom-html-messageLink'   => '<span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a></span>',
+            'custom-html-dismiss'       => '<a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>',
+            'custom-html-allow'         => '<a aria-label="allow cookies" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>',
+            'custom-html-deny'          => '<a aria-label="deny cookies" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>',
+            'custom-html-link'          => '<a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>',
+            'custom-html-close'         => '<span aria-label="dismiss cookie message" tabindex="0" class="cc-close">{{close}}</span>',
+        ];
+    }
+
+    protected function registerAssets(): array
+    {
+        $config = $this->getConfig();
+        if ($config['ignore-styling'] === true) {
+            return [
+                (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
+                (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
+            ];
+        }
+        return [
+            (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
+            (new Stylesheet('cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
+            (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
+        ];
     }
 }

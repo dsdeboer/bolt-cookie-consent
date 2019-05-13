@@ -1,9 +1,10 @@
 <?php
 
-namespace Bolt\Extension\Leskis\CookieConsent\Tests;
+namespace Bolt\Extension\Charpand\CookieConsent\Tests;
 
 use Bolt\Tests\BoltUnitTest;
-use Bolt\Extension\Leskis\CookieConsent\CookieConsentExtension;
+use Bolt\Extension\Charpand\CookieConsent\CookieConsentExtension;
+use Bolt\Extension\ExtensionInterface;
 
 /**
  * ExtensionName testing class.
@@ -20,7 +21,7 @@ class ExtensionTest extends BoltUnitTest
 
         $name = $extension->getName();
         $this->assertSame($name, 'CookieConsent');
-        $this->assertInstanceOf('\Bolt\Extension\ExtensionInterface', $extension);
+        $this->assertInstanceOf(ExtensionInterface::class, $extension);
     }
 
     public function testExtensionComposerJson()
