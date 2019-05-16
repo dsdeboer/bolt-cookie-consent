@@ -49,6 +49,11 @@
     },
     "author": "Duncan de Boer <duncan@charpand.nl>",
     "license": "ISC",
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
     "lint-staged": {
         "assets/**/*.scss": [
             "stylelint --fix",
