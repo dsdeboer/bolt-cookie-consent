@@ -37,12 +37,8 @@ class CookieConsentExtension extends SimpleExtension
             'templates' => [
                 'script' => '@bolt/_cookie_consent.twig',
             ],
-            'message'                   => 'This website uses cookies to ensure you get the best experience on our website',
-            'dismiss'                   => 'Got it!',
             'ignore-styling'            => false,
-            'learnMore'                 => 'More info',
             'href'                      => '',
-            'container'                 => '',
             'theme'                     => 'block',
             'position'                  => 'bottom',
             'palette-popup-background'  => '#383b75',
@@ -73,16 +69,9 @@ class CookieConsentExtension extends SimpleExtension
 
     protected function registerAssets(): array
     {
-        $config = $this->getConfig();
-        if ($config['ignore-styling'] === true) {
-            return [
-                (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
-                (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
-            ];
-        }
         return [
             (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
-            (new Stylesheet('cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
+            (new Stylesheet('cookieconsent.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
             (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
         ];
     }

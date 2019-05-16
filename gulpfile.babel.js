@@ -11,7 +11,7 @@ import browserSync from "browser-sync";
 
 gulp.task("styles", () => {
     return gulp
-        .src(["assets/scss/*.scss"])
+        .src(["./assets/scss/*.scss"])
         .pipe(plugins().sourcemaps.init())
         .pipe(
             plugins()
@@ -26,7 +26,7 @@ gulp.task("styles", () => {
 // Move the javascript files into our /src/js folder
 gulp.task("js", () => {
     return gulp
-        .src(["node_modules/bootstrap/dist/js/bootstrap.min.js", "node_modules/tether/dist/js/tether.min.js", "assets/scripts/*.js"])
+        .src(["node_modules/bootstrap/dist/js/bootstrap.min.js", "node_modules/tether/dist/js/tether.min.js", "./assets/scripts/*.js"])
         .pipe(gulp.dest("./web/"))
         .pipe(browserSync.stream());
 });
