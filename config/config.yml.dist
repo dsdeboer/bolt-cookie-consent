@@ -52,15 +52,5 @@ palette-popup-background: '#237afc'
 
 palette-button-background: '#f1d600'
 
-## Custom Html (https://cookieconsent.insites.com/documentation/javascript-api/#custom_options)
-custom-html-header: <span class="cc-header">{{header}}</span>&nbsp;
-custom-html-message: <span id="cookieconsent:desc" class="cc-message">{{message}}</span>
-custom-html-messageLink: <span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a></span>
-custom-html-dismiss: <a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>
-custom-html-allow: <a aria-label="allow cookies" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>
-custom-html-deny: <a aria-label="deny cookies" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>
-custom-html-link: <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>
-custom-html-close: <span aria-label="dismiss cookie message" tabindex="0" class="cc-close">{{close}}</span>
-
 ## Use with caution
 #ignore-styling: false

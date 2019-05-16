@@ -1,0 +1,40 @@
+{% use "@bolt/_cookie_blocks.twig" %}
+<script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "position": "{{ position|default("bottom") }}",
+            "container": "{{ container|default("null") }}",
+            "theme": "{{ theme|default("block") }}",
+            "content": {
+                "link": "{{ __('cookie_consent.learnMore') }}",
+                "message": "{{ __('cookie_consent.message') }}",
+                "dismiss": "{{ __('cookie_consent.dismiss') }}",
+                "href": "{{ href|default("") }}"
+            },"autoOpen":true,
+            "cookie": {
+                "path": "{{ path|default("/") }}",
+                "domain": "{{ domain|default('') }}",
+                "expiryDays": {{ expiryDays|default(365) }}
+            },
+            "window":'<div role="dialog" aria-label="cookieconsent aria-describedby="cookieconsent:desc" class="container-fluid">\{\{children\}\}</div>',
+            "palette": {
+                "popup": {
+                    "background": "{{ palette_popup_background|default('#383b75') }}"
+                },
+                "button": {
+                    "background": "{{ palette_button_background|default('#f1d600') }}"
+                }
+            },
+            "elements": {
+                "header": "{{ block("header") }}",
+                "message": "{{ block("message") }}",
+                "messagelink": "{{ block("messageLink") }}",
+                "dismiss": "{{ block("dismiss") }}",
+                "allow": "{{ block("allow") }}",
+                "deny": "{{ block("deny") }}",
+                "link": "{{ block("link") }}",
+                "close": "{{ block("close") }}",
+            }
+        })
+    });
+</script>

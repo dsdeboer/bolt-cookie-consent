@@ -35,9 +35,18 @@
             "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
+    "config": {
+        "platform": {
+            "php": "7.0"
+        },
+        "sort-packages": true
+    },
     "extra": {
         "bolt-assets": "web",
         "bolt-class": "Bolt\\Extension\\Charpand\\CookieConsent\\CookieConsentExtension",
-        "bolt-icon": "web/bolt-icon.png"
+        "bolt-icon": "web/bolt-icon.png",
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        }
     }
 }

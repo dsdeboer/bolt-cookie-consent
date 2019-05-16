@@ -1,0 +1,8 @@
+cookie_consent.header: ""
+cookie_consent.message: "This website uses cookies to ensure you get the best experience on our website."
+cookie_consent.dismiss: "Got it!"
+cookie_consent.allow: "Allow"
+cookie_consent.deny: "Deny"
+cookie_consent.link: ""
+cookie_consent.close: "Close"
+cookie_consent.learnMore: "More info"

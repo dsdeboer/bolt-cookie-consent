@@ -1,0 +1,39 @@
+{% block header -%}
+    <span class='cc-header'>{{ __('cookie_consent.header') }}</span>
+{%- endblock %}
+
+{% block message -%}
+    {% spaceless %}
+        <div id='cookieconsent:desc' class='row'>
+            <div class='text-left col'>{{ __('cookie_consent.message') }}</div>
+        </div>
+    {% endspaceless %}
+{%- endblock %}
+
+{% block messageLink -%}
+    {% spaceless %}
+        <div id='cookieconsent:desc' class='row'>
+            <div class='text-left col'>{{ __('cookie_consent.message') }}<a aria-label='learn more about cookies' tabindex='0' class='btn btn-outline-primary' href='{{ href }}' target='_blank'>{{ __('cookie_consent.link') }}</a></div>
+        </div>
+    {% endspaceless %}
+{%- endblock %}
+
+{% block dismiss -%}
+    <a aria-label='dismiss cookie message' tabindex='0' class='cc-btn cc-dismiss'>{{ __('cookie_consent.dismiss') }}</a>
+{%- endblock %}
+
+{% block allow -%}
+    <a aria-label='allow cookies' tabindex='0' class='cc-btn cc-allow'>{{ __('cookie_consent.allow') }}</a>
+{%- endblock %}
+
+{% block deny -%}
+    <a aria-label='deny cookies' tabindex='0' class='cc-btn cc-deny'>{{ __('cookie_consent.deny') }}</a>
+{%- endblock %}
+
+{% block link -%}
+    <a aria-label='learn more about cookies' tabindex='0' class='cc-link' href='{{ href }}' target='_blank'>{{ __('cookie_consent.link') }}</a>
+{%- endblock %}
+
+{% block close -%}
+    <span aria-label='dismiss cookie message' tabindex='0' class='cc-close'>{{ __('cookie_consent.close') }}</span>
+{%- endblock %}
