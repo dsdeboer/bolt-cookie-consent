@@ -8,7 +8,7 @@ import browserSync from "browser-sync";
 /* ----------------- */
 /* Styles
 /* ----------------- */
-
+const DIST_DIR = "../../../../public/extensions/vendor/charpand/cookie-consent";
 gulp.task("styles", () => {
     return gulp
         .src(["./assets/scss/*.scss"])
@@ -19,7 +19,7 @@ gulp.task("styles", () => {
                 .on("error", plugins().sass.logError)
         )
         .pipe(plugins().sourcemaps.write())
-        .pipe(gulp.dest("./web/"))
+        .pipe(gulp.dest(DIST_DIR))
         .pipe(browserSync.stream());
 });
 
@@ -27,7 +27,7 @@ gulp.task("styles", () => {
 gulp.task("js", () => {
     return gulp
         .src(["node_modules/bootstrap/dist/js/bootstrap.min.js", "node_modules/tether/dist/js/tether.min.js", "./assets/scripts/*.js"])
-        .pipe(gulp.dest("./web/"))
+        .pipe(gulp.dest(DIST_DIR))
         .pipe(browserSync.stream());
 });
 
@@ -39,7 +39,7 @@ gulp.task(
             proxy: "knights.bodu",
         });
 
-        gulp.watch(["node_modules/bootstrap/scss/bootstrap.scss", "scss/*.scss"], gulp.parallel(["styles"]));
+        gulp.watch(["node_modules/bootstrap/scss/bootstrap.scss", "assets/scss/*.scss"], gulp.parallel(["styles"]));
         gulp.watch(["templates/*.twig"]).on("change", () => {
             browserSync.reload();
         });
