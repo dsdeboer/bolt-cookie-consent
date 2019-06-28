@@ -71,7 +71,7 @@ class CookieConsentExtension extends SimpleExtension
     {
         return [
             (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
-            (new Stylesheet('cookieconsent.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
+            (new Stylesheet('cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
             (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
         ];
     }
