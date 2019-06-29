@@ -49,6 +49,7 @@ expiryDays: 365
 positon: bottom
 
 palette-popup-background: '#237afc'
+palette-popup-text: '#f1d600'
 
 palette-button-background: '#f1d600'
 
