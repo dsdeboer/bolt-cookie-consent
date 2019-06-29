@@ -13,7 +13,7 @@
 {% block messageLink -%}
     {% spaceless %}
         <div id='cookieconsent:desc' class='row'>
-            <div class='text-left col'>{{ __('cookie_consent.message') }}<a aria-label='learn more about cookies' tabindex='0' class='btn btn-outline-primary' href='{{ href }}' target='_blank'>{{ __('cookie_consent.link') }}</a></div>
+            <div class='text-left col'>{{ __('cookie_consent.message') }}<a aria-label='learn more about cookies' tabindex='0' class='cc-link' href='{{ href }}' target='_blank'>{{ __('cookie_consent.link') }}</a></div>
         </div>
     {% endspaceless %}
 {%- endblock %}

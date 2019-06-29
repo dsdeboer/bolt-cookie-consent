@@ -6,12 +6,9 @@ use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\File\Stylesheet;
 use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\Target;
-use Bolt\Controller\Zone;
-use Bolt\Extension\BobdenOtter\Seo\SEO;
 use Bolt\Extension\SimpleExtension;
 use Silex\Application;
 use Twig_Environment;
-use Twig_Markup;
 
 /**
  * CookieConsent extension class.
@@ -71,10 +68,9 @@ class CookieConsentExtension extends SimpleExtension
     protected function registerAssets(): array
     {
         return [
-            (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
-            (new Stylesheet('cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
-            (new Stylesheet('bootstrap.cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(999),
-            (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
+            Javascript::create('cookieconsent.min.js')->setPriority(980)->setLate(true),
+            Stylesheet::create('cookieconsent.min.css')->setPriority(990)->setLate(true),
+            Stylesheet::create('bootstrap.cookieconsent.min.css')->setPriority(991)->setLate(true),
         ];
     }
 }

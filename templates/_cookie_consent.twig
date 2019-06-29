@@ -11,13 +11,13 @@
                 "message": "{{ __('cookie_consent.message') }}",
                 "dismiss": "{{ __('cookie_consent.dismiss') }}",
                 "href": "{{ href|default("") }}"
-            }, "autoOpen": true,
+            },
+            "autoOpen": true,
             "cookie": {
                 "path": "{{ path|default("/") }}",
                 "domain": "{{ domain|default('') }}",
                 "expiryDays": {{ expiryDays|default(365) }}
             },
-            "window": '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override-1438462623 " style=""><!--googleoff: all--><div id="cookieconsent:desc" class="row"><div class="text-left col">Wij maken op deze website gebruik van cookies. Een cookie is een eenvoudig klein bestandje dat met pagina’s van deze website wordt meegestuurd en door uw browser op uw harde schrijf van uw computer wordt opgeslagen.<a aria-label="learn more about cookies" tabindex="0" class="btn btn-outline-primary" href="" target="_blank"></a></div></div><div class="cc-compliance"><a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">Begrepen!</a></div><!--googleon: all--></div>',
             "palette": {
                 "popup": {
                     "background": "{{ palette_popup_background|default('#383b75') }}",
@@ -27,6 +27,7 @@
                     "background": "{{ palette_button_background|default('#f1d600') }}"
                 }
             },
+            {#"window": '<div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override-1438462623 " style=""><!--googleoff: all--><div id="cookieconsent:desc" class="row"><div class="text-left col">Wij maken op deze website gebruik van cookies. Een cookie is een eenvoudig klein bestandje dat met pagina’s van deze website wordt meegestuurd en door uw browser op uw harde schrijf van uw computer wordt opgeslagen.<a aria-label="learn more about cookies" tabindex="0" class="btn btn-outline-primary" href="" target="_blank"></a></div></div><div class="cc-compliance"><a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">Begrepen!</a></div><!--googleon: all--></div>',#}
             "elements": {
                 "header": "{{ block("header") }}",
                 "message": "{{ block("message") }}",
