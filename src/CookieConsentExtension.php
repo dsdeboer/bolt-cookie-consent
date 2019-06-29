@@ -9,7 +9,6 @@ use Bolt\Asset\Target;
 use Bolt\Controller\Zone;
 use Bolt\Extension\BobdenOtter\Seo\SEO;
 use Bolt\Extension\SimpleExtension;
-use Bolt\Translation\Translator as Trans;
 use Silex\Application;
 use Twig_Environment;
 use Twig_Markup;
@@ -28,20 +27,22 @@ class CookieConsentExtension extends SimpleExtension
             'templates' => ['position' => 'prepend', 'namespace' => 'bolt'],
         ];
     }
+
     /**
      * {@inheritdoc}
      */
     protected function getDefaultConfig()
     {
         return [
-            'templates' => [
+            'templates'                 => [
                 'script' => '@bolt/_cookie_consent.twig',
             ],
             'ignore-styling'            => false,
             'href'                      => '',
-            'theme'                     => 'block',
-            'position'                  => 'bottom',
+            'theme'                     => 'edgeless',
+            'position'                  => 'top',
             'palette-popup-background'  => '#383b75',
+            'palette-popup-text'        => '#ffffff',
             'palette-button-background' => '#f1d600',
             'path'                      => '/',
             'domain'                    => '',
@@ -72,6 +73,7 @@ class CookieConsentExtension extends SimpleExtension
         return [
             (new JavaScript('cookieconsent.min.js'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(998),
             (new Stylesheet('cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(997),
+            (new Stylesheet('bootstrap.cookieconsent.min.css'))->setZone(Zone::FRONTEND)->setLate(true)->setPriority(999),
             (new Snippet())->setCallback([$this, 'cookieConsentSnippet'])->setZone(Zone::FRONTEND)->setLocation(Target::AFTER_BODY_JS)->setPriority(996),
         ];
     }

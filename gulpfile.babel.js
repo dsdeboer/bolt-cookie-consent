@@ -8,38 +8,40 @@ import minCss from "gulp-minify-css";
 import rename from "gulp-rename";
 
 const config = {
-    srcCss: "assets/scss/**/*.scss",
-    buildCss: "web",
+    srcScss: ["assets/scss/**/*.scss"],
+    build: "web",
 };
 
 gulp.task("styles", function(cb) {
-    gulp.src(config.srcCss)
-
-        // output non-minified CSS file
+    gulp.src(config.srcScss)
         .pipe(
             sass({
                 outputStyle: "expanded",
             }).on("error", sass.logError)
         )
         .pipe(autoprefixer())
-        .pipe(gulp.dest(config.buildCss))
+        .pipe(gulp.dest(config.build))
 
         // output the minified version
         .pipe(minCss())
         .pipe(rename({ extname: ".min.css" }))
-        .pipe(gulp.dest(config.buildCss));
+        .pipe(gulp.dest(config.build));
 
     cb();
 });
 
-/* ----------------- */
-/* Styles
-/* ----------------- */
-const DIST_DIR = "web";
-
-// Move the javascript files into our /src/js folder
+gulp.task("vendor", () => {
+    return gulp
+        .src([
+            "node_modules/cookieconsent/build/cookieconsent.min.css",
+            "node_modules/cookieconsent/build/cookieconsent.min.js",
+            "node_modules/bootstrap/dist/js/bootstrap.min.js",
+            "node_modules/tether/dist/js/tether.min.js",
+        ])
+        .pipe(gulp.dest(config.build));
+});
 gulp.task("js", () => {
-    return gulp.src(["node_modules/bootstrap/dist/js/bootstrap.min.js", "node_modules/tether/dist/js/tether.min.js", "./assets/scripts/*.js"]).pipe(gulp.dest(DIST_DIR));
+    return gulp.src(["./assets/scripts/*.js"]).pipe(gulp.dest(config.build));
 });
 
 // Static Server + watching scss/html files
@@ -50,4 +52,4 @@ gulp.task(
     })
 );
 
-gulp.task("default", gulp.series("js", "styles"));
+gulp.task("default", gulp.series("js", "vendor", "styles"));
