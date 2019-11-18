@@ -1,5 +1,8 @@
 # @see https://silktide.com/tools/cookie-consent/docs/installation/
 
+templates:
+    script: '@charpand/cookie_consent.twig'
+
 # The message shown by the plugin.
 message: This website uses cookies to ensure you get the best experience on our website
 

@@ -4,11 +4,9 @@ namespace Bolt\Extension\Charpand\CookieConsent;
 
 use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\File\Stylesheet;
-use Bolt\Asset\Snippet\Snippet;
-use Bolt\Asset\Target;
 use Bolt\Extension\SimpleExtension;
 use Silex\Application;
-use Twig_Environment;
+use Twig\Markup;
 
 /**
  * CookieConsent extension class.
@@ -28,11 +26,47 @@ class CookieConsentExtension extends SimpleExtension
     /**
      * {@inheritdoc}
      */
+    protected function registerTwigFunctions()
+    {
+        return [
+            'cookie_consent' => ['cookieConsent', ['is_safe' => ['html']]],
+        ];
+    }
+
+    /**
+     * The callback function when {{ my_twig_function() }} is used in a template.
+     *
+     * @return string
+     */
+    public function cookieConsent()
+    {
+        $config = $this->getConfig();
+
+        $templateVars = [
+            'domain'                    => $config['domain'],
+            'href'                      => $config['href'],
+            'theme'                     => $config['theme'],
+            'position'                  => $config['position'],
+            'expiryDays'                => $config['expiryDays'],
+            'path'                      => $config['path'],
+            'container'                 => $config['container'],
+            'palette_button_background' => $config['palette-button-background'],
+            'palette_popup_background'  => $config['palette-popup-background'],
+            'palette_popup_text'        => $config['palette-popup-text'],
+        ];
+
+        $html = $this->renderTemplate('@bolt/cookie_consent.twig', $templateVars);
+        return new Markup($html, 'UTF-8');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefaultConfig()
     {
         return [
             'templates'                 => [
-                'script' => '@bolt/_cookie_consent.twig',
+                'script' => '@bolt/cookie_consent.twig',
             ],
             'ignore-styling'            => false,
             'href'                      => '',
@@ -48,21 +82,15 @@ class CookieConsentExtension extends SimpleExtension
     }
 
     /**
+     * We can share our configuration as a service so our other classes can use it.
+     *
      * {@inheritdoc}
      */
     protected function registerServices(Application $app)
     {
-        $app['twig'] = $app->extend(
-            'twig',
-            function (Twig_Environment $twig) use ($app) {
-                $config = $this->getConfig();
-
-                $consent = new CookieConsent($app, $config);
-                $twig->addGlobal('consent', $consent);
-
-                return $twig;
-            }
-        );
+        $app['cookie_consent.config'] = $app->share(function ($app) {
+            return $this->getConfig();
+        });
     }
 
     protected function registerAssets(): array
